@@ -1,3 +1,6 @@
+window.TESTE_JOABE = "FUNCIONOU";
+console.log("SCRIPT INICIOU");
+
 const supabaseUrl = "https://vzntumcjxxtraipcrixd.supabase.co";
 
 const supabaseKey = "sb_publishable_8sQ1IVH57xXdZnqH-e2zHg_GqilBXtB";
