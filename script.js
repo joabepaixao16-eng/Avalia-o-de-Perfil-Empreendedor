@@ -1,5 +1,3 @@
-window.TESTE_JOABE = "FUNCIONOU";
-console.log("SCRIPT INICIOU");
 
 const supabaseUrl = "https://vzntumcjxxtraipcrixd.supabase.co";
 
@@ -9,25 +7,6 @@ const supabase = window.supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
-
-console.log("SUPABASE OK");
-console.log(window.supabase);
-console.log(supabase);
-console.log("SCRIPT CARREGOU");
-
-async function testarSupabase() {
-
-    const { data, error } = await supabase
-        .from("Ranking")
-        .select("*");
-
-    console.log(data);
-    console.log(error);
-}
-
-window.addEventListener("load", () => {
-    testarSupabase();
-});
 
 let nome = "";
 let perguntaAtual = 0;
@@ -359,6 +338,10 @@ const { error } = await supabase
     .from("Ranking")
     .insert([resultado]);
 
+if (error) {
+    console.error(error);
+}
+
 console.log(error);
     
     document.querySelector(".container").innerHTML = `
@@ -398,9 +381,14 @@ console.log(error);
 async function verHistorico(){
 
     const { data: historico, error } =
-        await supabase
-            .from("Ranking")
-            .select("*");
+    await supabase
+        .from("Ranking")
+        .select("*");
+
+if (error) {
+    console.error(error);
+    return;
+}
 
     if(!historico || historico.length === 0){
 
@@ -500,19 +488,32 @@ function verRespostaBonus(resposta){
     `;
 }
 
-function limparHistorico(){
+async function limparHistorico(){
 
     if(!confirm("Deseja realmente apagar todo o histórico?")){
         return;
     }
 
-    localStorage.removeItem("historico");
+    const { error } = await supabase
+        .from("Ranking")
+        .delete()
+        .gte("pontuacao", 0);
+
+    if(error){
+        alert("Erro ao limpar histórico.");
+        return;
+    }
 
     alert("Histórico limpo com sucesso!");
-
     location.reload();
 }
 
 window.mostrarFormulario = mostrarFormulario;
-window.verHistorico = verHistorico;
 window.mostrarSobre = mostrarSobre;
+window.verHistorico = verHistorico;
+window.iniciarTeste = iniciarTeste;
+window.responder = responder;
+window.voltarPergunta = voltarPergunta;
+window.salvarBonus = salvarBonus;
+window.verRespostaBonus = verRespostaBonus;
+window.limparHistorico = limparHistorico;
