@@ -8,6 +8,7 @@ const supabase = window.supabase.createClient(
 );
 
 console.log("SUPABASE OK");
+console.log(window.supabase);
 console.log(supabase);
 
 async function testarSupabase() {
