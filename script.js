@@ -396,7 +396,7 @@ async function verHistorico(){
             .from("Ranking")
             .select("*");
 
-    if(historico.length === 0){
+    if(!historico || historico.length === 0){
 
         document.querySelector(".container").innerHTML = `
             <h1>Histórico</h1>
