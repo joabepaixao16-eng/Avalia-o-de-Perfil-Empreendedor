@@ -344,14 +344,9 @@ classePerfil = "perfil-proativo";
     data: new Date().toLocaleString("pt-BR")
 };
 
-let historico = JSON.parse(localStorage.getItem("historico")) || [];
-
-historico.push(resultado);
-
-localStorage.setItem(
-    "historico",
-    JSON.stringify(historico)
-);
+supabase
+    .from("Ranking")
+    .insert([resultado]);
     document.querySelector(".container").innerHTML = `
         <h1>Relatório Final</h1>
 
@@ -386,10 +381,12 @@ localStorage.setItem(
     `;
 }
 
-function verHistorico(){
+async function verHistorico(){
 
-    let historico =
-        JSON.parse(localStorage.getItem("historico")) || [];
+    const { data: historico, error } =
+        await supabase
+            .from("Ranking")
+            .select("*");
 
     if(historico.length === 0){
 
