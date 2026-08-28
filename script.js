@@ -10,6 +10,7 @@ const supabase = window.supabase.createClient(
 console.log("SUPABASE OK");
 console.log(window.supabase);
 console.log(supabase);
+console.log("SCRIPT CARREGOU");
 
 async function testarSupabase() {
 
@@ -21,7 +22,9 @@ async function testarSupabase() {
     console.log(error);
 }
 
-testarSupabase();
+window.addEventListener("load", () => {
+    testarSupabase();
+});
 
 let nome = "";
 let perguntaAtual = 0;
@@ -506,3 +509,7 @@ function limparHistorico(){
 
     location.reload();
 }
+
+window.mostrarFormulario = mostrarFormulario;
+window.verHistorico = verHistorico;
+window.mostrarSobre = mostrarSobre;
