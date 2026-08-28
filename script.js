@@ -1,3 +1,23 @@
+const supabaseUrl = "https://vzntumcjxxtraipcrixd.supabase.co";
+const supabaseKey = "sb_publishable_8sQ1IVH57xXdZnqH-e2zHg_GqilBXtB";
+
+const supabase = window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+async function testarSupabase() {
+
+    const { data, error } = await supabase
+        .from("Ranking")
+        .select("*");
+
+    console.log(data);
+    console.log(error);
+}
+
+testarSupabase();
+
 let nome = "";
 let perguntaAtual = 0;
 let pontuacao = 0;
