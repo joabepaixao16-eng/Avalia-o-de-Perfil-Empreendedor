@@ -1,10 +1,14 @@
 const supabaseUrl = "https://vzntumcjxxtraipcrixd.supabase.co";
+
 const supabaseKey = "sb_publishable_8sQ1IVH57xXdZnqH-e2zHg_GqilBXtB";
 
 const supabase = window.supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
+
+console.log("SUPABASE OK");
+console.log(supabase);
 
 async function testarSupabase() {
 
