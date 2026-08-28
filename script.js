@@ -246,7 +246,7 @@ function salvarBonus(){
     mostrarResultado();
 }
 
-function mostrarResultado(){
+async function mostrarResultado(){
 
     let percentual = Math.round((pontuacao / 40) * 100);
 
@@ -349,9 +349,12 @@ classePerfil = "perfil-proativo";
     data: new Date().toLocaleString("pt-BR")
 };
 
-supabase
+const { error } = await supabase
     .from("Ranking")
     .insert([resultado]);
+
+console.log(error);
+    
     document.querySelector(".container").innerHTML = `
         <h1>Relatório Final</h1>
 
