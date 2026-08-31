@@ -1,13 +1,3 @@
-
-const supabaseUrl = "https://vzntumcjxxtraipcrixd.supabase.co";
-
-const supabaseKey = "sb_publishable_8sQ1IVH57xXdZnqH-e2zHg_GqilBXtB";
-
-const supabase = window.supabase.createClient(
-    supabaseUrl,
-    supabaseKey
-);
-
 let nome = "";
 let perguntaAtual = 0;
 let pontuacao = 0;
@@ -231,7 +221,7 @@ function salvarBonus(){
     mostrarResultado();
 }
 
-async function mostrarResultado(){
+function mostrarResultado()
 
     let percentual = Math.round((pontuacao / 40) * 100);
 
@@ -325,7 +315,7 @@ classePerfil = "perfil-proativo";
         desafio = "Criar e apresentar uma proposta de melhoria.";
     }
 
- let resultado = {
+let resultado = {
     nome: nome,
     pontuacao: pontuacao,
     percentual: percentual,
@@ -334,15 +324,15 @@ classePerfil = "perfil-proativo";
     data: new Date().toLocaleString("pt-BR")
 };
 
-const { error } = await supabase
-    .from("Ranking")
-    .insert([resultado]);
+let historico =
+    JSON.parse(localStorage.getItem("historico")) || [];
 
-if (error) {
-    console.error(error);
-}
+historico.push(resultado);
 
-console.log(error);
+localStorage.setItem(
+    "historico",
+    JSON.stringify(historico)
+);
     
     document.querySelector(".container").innerHTML = `
         <h1>Relatório Final</h1>
@@ -378,17 +368,10 @@ console.log(error);
     `;
 }
 
-async function verHistorico(){
+function verHistorico(){
 
-    const { data: historico, error } =
-    await supabase
-        .from("Ranking")
-        .select("*");
-
-if (error) {
-    console.error(error);
-    return;
-}
+    let historico =
+        JSON.parse(localStorage.getItem("historico")) || [];
 
     if(!historico || historico.length === 0){
 
@@ -488,23 +471,16 @@ function verRespostaBonus(resposta){
     `;
 }
 
-async function limparHistorico(){
+function limparHistorico(){
 
     if(!confirm("Deseja realmente apagar todo o histórico?")){
         return;
     }
 
-    const { error } = await supabase
-        .from("Ranking")
-        .delete()
-        .gte("pontuacao", 0);
-
-    if(error){
-        alert("Erro ao limpar histórico.");
-        return;
-    }
+    localStorage.removeItem("historico");
 
     alert("Histórico limpo com sucesso!");
+
     location.reload();
 }
 
