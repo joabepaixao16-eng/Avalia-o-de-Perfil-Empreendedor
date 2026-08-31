@@ -1,4 +1,3 @@
-alert("VERSAO NOVA");
 var nome = "";
 var perguntaAtual = 0;
 var pontuacao = 0;
@@ -206,7 +205,7 @@ function mostrarPerguntaBonus(){
     placeholder="Digite sua resposta aqui...">
         </textarea>
 
-        <br><br>
+        <br>
 
         <button onclick="salvarBonus()">
             Finalizar Avaliação
