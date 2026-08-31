@@ -1,8 +1,9 @@
-let nome = "";
-let perguntaAtual = 0;
-let pontuacao = 0;
-let respostas = [];
-let respostaBonus = "";
+alert("VERSAO NOVA");
+var nome = "";
+var perguntaAtual = 0;
+var pontuacao = 0;
+var respostas = [];
+var respostaBonus = "";
 
 const perguntas = [
     "Quando recebo uma tarefa com pouca orientação, consigo definir sozinho os próximos passos?",
@@ -221,7 +222,7 @@ function salvarBonus(){
     mostrarResultado();
 }
 
-function mostrarResultado()
+function mostrarResultado(){
 
     let percentual = Math.round((pontuacao / 40) * 100);
 
